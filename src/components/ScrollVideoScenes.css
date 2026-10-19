@@ -1,0 +1,384 @@
+.scroll-video-sequence {
+  --sequence-progress: 0;
+  --sequence-opacity: 0;
+  --opening-progress: 0;
+  position: relative;
+  isolation: isolate;
+  height: 450svh;
+  min-height: 2500px;
+  margin: 8px auto 0;
+  width: min(100%, 1680px);
+  contain: layout style;
+}
+
+.scroll-video-stage {
+  position: sticky;
+  top: 6px;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  height: calc(100svh - 12px);
+  min-height: 520px;
+  border-radius: 15px;
+  background: #06100b;
+  box-shadow: 0 24px 70px #101a2514;
+}
+
+.scroll-video-stage canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: var(--sequence-opacity, 0);
+}
+
+.scroll-video-opening {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  opacity: var(--opening-art-opacity, 1);
+  pointer-events: none;
+}
+
+.scroll-video-opening-background {
+  position: absolute;
+  inset: -4%;
+  z-index: 0;
+  background: url('/hero-frames/rainforest-opening-bg.png') center 48% / cover no-repeat;
+  transform: translate3d(var(--parallax-bg-x, 0px), calc(var(--parallax-bg-y, 0px) + var(--opening-bg-y, 0px)), 0) scale(1.08);
+  transition: transform 0.35s cubic-bezier(.2, .7, .2, 1);
+  will-change: transform;
+}
+
+.scroll-video-opening-copy {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 51%;
+  width: min(75%, 1050px);
+  transform: translate3d(calc(-50% + var(--parallax-text-x, 0px)), calc(-50% + var(--parallax-text-y, 0px) + var(--opening-copy-y, 0px)), 0) scale(var(--opening-title-scale, 1));
+  opacity: var(--opening-text-opacity, 1);
+  filter: blur(var(--opening-copy-blur, 0px));
+  text-align: center;
+  color: #f1f0df;
+  transition: transform 0.35s cubic-bezier(.2, .7, .2, 1);
+  will-change: transform, opacity, filter;
+}
+
+.scroll-video-opening-copy > span {
+  display: block;
+  margin-bottom: 22px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .25em;
+  color: #d7e0cc;
+}
+
+.scroll-video-opening-copy h2 {
+  margin: 0;
+  font-family: inherit;
+  font-size: clamp(58px, 9.2vw, 132px);
+  font-weight: 300;
+  line-height: .83;
+  letter-spacing: -.065em;
+  text-shadow: 0 4px 30px #06100b88;
+}
+
+.scroll-video-opening-birds,
+.scroll-video-opening-monkey {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: min(92vh, 1250px);
+  object-fit: contain;
+  transform: translate3d(calc(-50% + var(--parallax-bird-x, 0px)), calc(-50% + var(--parallax-bird-y, 0px) + var(--opening-bird-y, 0px)), 0);
+  filter: drop-shadow(0 18px 24px #0005);
+  transition: transform .35s cubic-bezier(.2, .7, .2, 1);
+  will-change: transform;
+}
+
+.scroll-video-opening--frog {
+  z-index: 4;
+  opacity: var(--final-art-opacity, 0);
+}
+
+.scroll-video-opening-background--frog {
+  background-image: url('/hero-frames/frog-rainforest-bg.png');
+  background-position: center;
+  transform: translate3d(var(--parallax-bg-x, 0px), calc(var(--parallax-bg-y, 0px) + var(--final-bg-y, 0px)), 0) scale(1.08);
+}
+
+.scroll-video-opening-copy--frog {
+  left: 69%;
+  top: 50%;
+  width: min(48%, 710px);
+  text-align: left;
+  transform: translate3d(calc(-50% + var(--parallax-text-x, 0px)), calc(-50% + var(--parallax-text-y, 0px) + var(--final-copy-y, 0px)), 0) scale(var(--final-title-scale, 1));
+  opacity: var(--final-text-opacity, 1);
+  filter: blur(var(--final-copy-blur, 0px));
+}
+
+.scroll-video-opening-copy--frog > span {
+  color: #d8e7c7;
+}
+
+.scroll-video-opening-copy--frog h2 {
+  font-size: clamp(58px, 7.8vw, 114px);
+  line-height: .88;
+}
+
+.scroll-video-opening-copy--frog p {
+  margin: 25px 0 0;
+  color: #edf0df;
+  font-size: clamp(14px, 1.25vw, 19px);
+  line-height: 1.6;
+  text-shadow: 0 2px 16px #06100bcc;
+}
+
+.scroll-video-opening-frog {
+  position: absolute;
+  z-index: 2;
+  left: 29%;
+  top: 52%;
+  width: min(76vw, 1100px);
+  height: min(96vh, 1300px);
+  object-fit: contain;
+  transform: translate3d(calc(-50% + var(--parallax-bird-x, 0px)), calc(-50% + var(--parallax-bird-y, 0px) + var(--final-subject-y, 0px)), 0);
+  filter: drop-shadow(0 18px 24px #0005);
+  transition: transform .35s cubic-bezier(.2, .7, .2, 1);
+  will-change: transform;
+}
+
+.scroll-video-opening-birds {
+  z-index: 2;
+  width: min(112vw, 1900px);
+}
+
+.scroll-video-opening--monkey {
+  z-index: 3;
+  opacity: var(--monkey-art-opacity, 0);
+}
+
+.scroll-video-opening-background--monkey {
+  background-image: url('/hero-frames/monkey-rainforest-bg.png');
+  background-position: center;
+  transform: translate3d(var(--parallax-bg-x, 0px), calc(var(--parallax-bg-y, 0px) + var(--monkey-bg-y, 0px)), 0) scale(1.08);
+}
+
+.scroll-video-opening-copy--monkey {
+  left: 69%;
+  top: 51%;
+  width: min(47%, 690px);
+  text-align: left;
+  transform: translate3d(calc(-50% + var(--parallax-text-x, 0px)), calc(-50% + var(--parallax-text-y, 0px) + var(--monkey-copy-y, 0px)), 0) scale(var(--monkey-title-scale, 1));
+  opacity: var(--monkey-text-opacity, 0);
+  filter: blur(var(--monkey-copy-blur, 0px));
+}
+
+.scroll-video-opening-copy--monkey > span {
+  color: #d8e7c7;
+}
+
+.scroll-video-opening-copy--monkey h2 {
+  font-size: clamp(64px, 8.4vw, 122px);
+  line-height: .88;
+}
+
+.scroll-video-opening-copy--monkey p {
+  margin: 25px 0 0;
+  max-width: 440px;
+  color: #edf0df;
+  font-size: clamp(14px, 1.25vw, 19px);
+  line-height: 1.6;
+  text-shadow: 0 2px 16px #06100bcc;
+}
+
+.scroll-video-opening-monkey {
+  z-index: 2;
+  left: 28%;
+  width: min(66vw, 950px);
+  height: min(96vh, 1300px);
+  transform: translate3d(calc(-50% + var(--parallax-bird-x, 0px)), calc(-50% + var(--parallax-bird-y, 0px) + var(--monkey-subject-y, 0px)), 0);
+}
+
+.scroll-video-frame-index {
+  position: absolute;
+  z-index: 4;
+  right: clamp(22px, 4vw, 54px);
+  bottom: clamp(28px, 5vw, 70px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #eef1df;
+  font-size: 8px;
+  letter-spacing: .16em;
+  text-shadow: 0 2px 12px #0009;
+}
+
+.scroll-video-frame-index i {
+  display: block;
+  width: 34px;
+  height: 1px;
+  background: #ffffffaa;
+}
+
+.scroll-video-sequence-description {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.scroll-video-reduced {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .scroll-video-sequence {
+    min-height: 0;
+  }
+
+  .scroll-video-stage {
+    min-height: 480px;
+    border-radius: 15px;
+  }
+
+  .scroll-video-opening-copy {
+    width: 90%;
+    top: 48%;
+  }
+
+  .scroll-video-opening-copy > span {
+    margin-bottom: 18px;
+    font-size: 7px;
+    letter-spacing: .17em;
+  }
+
+  .scroll-video-opening-copy h2 {
+    font-size: clamp(46px, 12vw, 80px);
+  }
+
+  .scroll-video-opening-birds {
+    width: 130vw;
+    height: 78vh;
+  }
+
+  .scroll-video-opening-copy--monkey {
+    left: 65%;
+    top: 43%;
+    width: 57%;
+  }
+
+  .scroll-video-opening-copy--monkey h2 {
+    font-size: clamp(42px, 10vw, 68px);
+  }
+
+  .scroll-video-opening-copy--monkey p {
+    margin-top: 14px;
+    font-size: 12px;
+  }
+
+  .scroll-video-opening-monkey {
+    left: 22%;
+    width: 82vw;
+    height: 75vh;
+  }
+
+  .scroll-video-opening-copy--frog {
+    left: 66%;
+    top: 43%;
+    width: 58%;
+  }
+
+  .scroll-video-opening-copy--frog h2 {
+    font-size: clamp(40px, 9vw, 64px);
+  }
+
+  .scroll-video-opening-copy--frog p {
+    margin-top: 14px;
+    font-size: 12px;
+  }
+
+  .scroll-video-opening-frog {
+    left: 24%;
+    width: 95vw;
+    height: 74vh;
+  }
+
+  .scroll-video-frame-index {
+    right: 20px;
+    bottom: 26px;
+    font-size: 7px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-video-sequence {
+    height: 100svh;
+    min-height: 0;
+  }
+
+  .scroll-video-stage {
+    position: relative;
+    top: auto;
+  }
+
+  .scroll-video-opening,
+  .scroll-video-stage canvas,
+  .scroll-video-frame-index {
+    display: none;
+  }
+
+  .scroll-video-reduced {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2px;
+    width: 100%;
+    height: 100%;
+    background: #06100b;
+  }
+
+  .scroll-video-reduced figure {
+    position: relative;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    margin: 0;
+    background: #06100b;
+  }
+
+  .scroll-video-reduced img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .scroll-video-reduced figcaption {
+    position: absolute;
+    left: 18px;
+    bottom: 18px;
+    color: #eef1df;
+    font-size: 8px;
+    letter-spacing: .16em;
+    text-shadow: 0 2px 10px #000;
+  }
+}
+
+@media (max-width: 700px) and (prefers-reduced-motion: reduce) {
+  .scroll-video-reduced {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .scroll-video-reduced figure:last-child {
+    grid-column: 1 / -1;
+  }
+}

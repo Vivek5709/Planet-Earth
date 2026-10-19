@@ -1,0 +1,187 @@
+.ocean-meet {
+  position: relative;
+  z-index: 2;
+  isolation: isolate;
+  display: grid;
+  width: calc(100% - 12px);
+  min-height: min(820px, calc(100svh - 12px));
+  height: calc(100svh - 12px);
+  margin: 8px auto 6px;
+  overflow: visible;
+  place-items: center;
+  border-radius: 22px;
+  color: #f2f8fa;
+  background: transparent;
+}
+
+.ocean-meet-background,
+.ocean-meet::after,
+.ocean-meet-waterline,
+.ocean-fish-layer,
+.ocean-meet-copy {
+  position: absolute;
+  inset: 0;
+}
+
+.ocean-meet-background {
+  z-index: -3;
+  overflow: hidden;
+  border-radius: inherit;
+  inset: 70px 0;
+  border: 1px solid #ffffff38;
+  box-shadow: 0 30px 85px #0005;
+}
+
+.ocean-meet-background-image {
+  position: absolute;
+  inset: -8px;
+  background: url('/ocean/deep-ocean-bg.png') center 48% / cover no-repeat;
+  filter: blur(2px) saturate(.9);
+}
+
+.ocean-meet::after {
+  z-index: -2;
+  inset: 70px 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, #03132935 0%, #03132960 45%, #020d21a6 100%), radial-gradient(ellipse at 50% 48%, #071a2b20, #03102775 74%);
+  content: '';
+}
+
+.ocean-meet-waterline {
+  z-index: -1;
+  inset: 70px 0 auto;
+  height: 24%;
+  background: linear-gradient(180deg, #8bd7ff12, transparent);
+  pointer-events: none;
+}
+
+.ocean-meet-copy {
+  z-index: 2;
+  inset: auto;
+  width: min(1180px, 86vw);
+  margin-top: -1vh;
+  text-align: center;
+  text-shadow: 0 4px 34px #020b1d99;
+}
+
+.ocean-meet-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 clamp(24px, 5vh, 58px);
+  color: #9dc8d9;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .22em;
+}
+
+.ocean-meet-eyebrow span { width: 25px; height: 1px; background: #a4d3df; }
+
+.ocean-meet-copy h2 {
+  margin: 0;
+  color: #f5fbff;
+  font-size: clamp(72px, 16vw, 280px);
+  font-weight: 700;
+  line-height: .79;
+  letter-spacing: -.09em;
+  text-wrap: balance;
+  white-space: nowrap;
+}
+
+.ocean-meet-copy h2 em { color: #8fcee4; font-style: normal; }
+
+.ocean-meet-description {
+  max-width: 420px;
+  margin: clamp(25px, 4vh, 42px) auto 0;
+  color: #d3e2e9;
+  font-size: clamp(14px, 1.35vw, 18px);
+  line-height: 1.7;
+}
+
+.ocean-fish-layer { z-index: 1; pointer-events: none; }
+.ocean-fish-layer-front { z-index: 3; }
+.ocean-fish { position: absolute; display: block; opacity: 0; filter: blur(18px); translate: 0 24px; will-change: transform, translate, filter, opacity; transform: translate3d(0, var(--fish-parallax-y, 0px), 0); pointer-events: none; }
+.ocean-fish-art { display: block; width: 100%; height: auto; filter: drop-shadow(0 18px 32px #0007); animation: ocean-fish-drift 8s ease-in-out infinite alternate; }
+.ocean-fish-one { top: 3%; left: 7%; width: clamp(220px, 25vw, 400px); margin-top: -100px; opacity: 1; }
+.ocean-fish-two { top: 2%; right: 8%; width: clamp(210px, 23vw, 370px); margin-top: -100px; opacity: 1; }
+.ocean-fish-two .ocean-fish-art { animation-delay: -3s; transform: rotate(8deg) scaleX(-1); }
+.ocean-fish-one .ocean-fish-art { transform: rotate(-10deg); }
+.ocean-fish-three { bottom: -20%; left: 9%; width: clamp(205px, 22vw, 360px); margin-bottom: 20px; }
+.ocean-fish-four { right: 7%; bottom: -20%; width: clamp(215px, 23vw, 370px); margin-bottom: 20px; }
+.ocean-fish-three .ocean-fish-art { animation-delay: -1.5s; transform: rotate(8deg); }
+.ocean-fish-four .ocean-fish-art { animation-delay: -4.5s; transform: rotate(-8deg) scaleX(-1); }
+
+.ocean-meet-eyebrow,
+.ocean-meet-copy h2,
+.ocean-meet-description,
+.ocean-meet-index { opacity: 0; filter: blur(9px); transform: translateY(24px); }
+.ocean-meet.is-visible .ocean-fish { animation: ocean-fish-arrive 1.5s cubic-bezier(.16,.75,.24,1) both; }
+.ocean-meet.is-visible .ocean-fish-two { animation-delay: .12s; }
+.ocean-meet.is-visible .ocean-fish-three { animation-delay: .24s; }
+.ocean-meet.is-visible .ocean-fish-four { animation-delay: .36s; }
+.ocean-meet.is-visible .ocean-fish-art { animation-play-state: running; }
+.ocean-fish-art { animation-play-state: paused; }
+.ocean-meet.is-visible .ocean-meet-eyebrow { animation: ocean-copy-arrive .75s ease .2s both; }
+.ocean-meet.is-visible .ocean-meet-copy h2 { animation: ocean-copy-arrive 1s cubic-bezier(.2,.8,.2,1) .38s both; }
+.ocean-meet.is-visible .ocean-meet-copy h2 em { display: inline-block; animation: ocean-copy-emphasis .85s cubic-bezier(.2,.8,.2,1) .68s both; }
+.ocean-meet.is-visible .ocean-meet-description { animation: ocean-copy-arrive .85s cubic-bezier(.2,.8,.2,1) .68s both; }
+.ocean-meet.is-visible .ocean-meet-index { animation: ocean-copy-arrive .75s ease .9s both; }
+
+@keyframes ocean-fish-arrive {
+  0% { opacity: 0; filter: blur(18px); translate: 0 30px; }
+  62% { opacity: 1; filter: blur(2px); }
+  82% { translate: 0 -4px; }
+  100% { opacity: 1; filter: blur(0); translate: 0 0; }
+}
+
+@keyframes ocean-copy-arrive {
+  from { opacity: 0; filter: blur(9px); transform: translateY(24px); }
+  to { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
+
+@keyframes ocean-copy-emphasis {
+  from { opacity: .35; filter: blur(7px); transform: translateY(18px); }
+  to { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
+
+.ocean-meet-index {
+  position: absolute;
+  right: clamp(24px, 5vw, 72px);
+  bottom: 28px;
+  z-index: 4;
+  color: #b1cad4;
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: .18em;
+}
+
+@keyframes ocean-fish-drift {
+  from { translate: 0 0; }
+  to { translate: 0 -34px; }
+}
+
+@media (max-width: 700px) {
+  .ocean-meet { min-height: 680px; height: calc(92svh - 12px); }
+  .ocean-meet-background,
+  .ocean-meet::after { inset: 52px 0; }
+  .ocean-meet-waterline { inset: 52px 0 auto; }
+  .ocean-meet-copy { width: 94%; }
+  .ocean-meet-copy h2 { font-size: clamp(68px, 17vw, 112px); }
+  .ocean-meet-eyebrow { font-size: 7px; letter-spacing: .16em; }
+  .ocean-meet-description { max-width: 300px; font-size: 13px; }
+  .ocean-fish-one { top: 1%; left: 1%; width: 50vw; }
+  .ocean-fish-two { top: 0%; right: 1%; width: 47vw; }
+  .ocean-fish-three { bottom: -14%; left: 2%; width: 44vw; }
+  .ocean-fish-four { right: 2%; bottom: -14%; width: 46vw; }
+  .ocean-meet-index { right: 20px; bottom: 18px; font-size: 6px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ocean-fish,
+  .ocean-meet-eyebrow,
+  .ocean-meet-copy h2,
+  .ocean-meet-copy h2 em,
+  .ocean-meet-description,
+  .ocean-meet-index { opacity: 1; filter: none; translate: none; transform: none; animation: none !important; }
+  .ocean-fish-art { animation: none; }
+}

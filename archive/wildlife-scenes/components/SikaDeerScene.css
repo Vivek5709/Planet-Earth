@@ -1,0 +1,276 @@
+.deer-scene-section {
+  position: relative;
+  height: 100svh;
+  min-height: 560px;
+  isolation: isolate;
+}
+
+.deer-scene-stage {
+  position: relative;
+  top: 6px;
+  width: 100%;
+  height: calc(100svh - 12px);
+  min-height: 560px;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 15px;
+  background: #7e663d;
+  --scene-reveal: 0;
+  --scene-progress-percent: 0%;
+  --entry-blur: 4px;
+}
+
+[data-scene-reveal].is-scene-revealed .deer-scene-stage { --entry-blur: 0px; }
+.deer-scene-stage img,
+.deer-scene-stage .deer-scene-text-layer { transition: filter .55s ease; }
+
+.deer-scene-background,
+.deer-scene-shade,
+.deer-scene-text-layer,
+.deer-scene-grass,
+.deer-scene-ground {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.deer-scene-background {
+  z-index: 0;
+  object-fit: cover;
+  object-position: center 58%;
+  scale: 1.06;
+  translate: var(--pointer-bg-x, 0px) var(--pointer-bg-y, 0px);
+  filter: blur(calc(2px + var(--entry-blur))) saturate(.86) brightness(.88);
+  transition: translate .42s cubic-bezier(.2,.75,.2,1);
+  will-change: translate, scale;
+}
+
+.deer-scene-shade {
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, #1e1c0d99 0%, #241c0d30 46%, #241c0d12 72%, #241c0d55 100%), linear-gradient(0deg, #211b0dd9 0%, transparent 32%, #211b0d20 100%);
+}
+
+.deer-scene-text-layer {
+  z-index: 1;
+  pointer-events: none;
+  translate: var(--pointer-text-x, 0px) var(--pointer-text-y, 0px);
+  filter: blur(var(--entry-blur));
+  transition: translate .38s cubic-bezier(.2,.75,.2,1);
+  will-change: translate;
+}
+
+.deer-scene-eyebrow {
+  position: absolute;
+  top: 11%;
+  left: 8%;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin: 0;
+  color: #f0e4c3;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .2em;
+}
+
+.deer-scene-eyebrow::before {
+  content: '';
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: #e3cd98;
+}
+
+.deer-scene-eyebrow span { color: #caa45b; }
+
+.deer-scene-text-layer h2 {
+  position: absolute;
+  top: 25%;
+  left: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .07em;
+  width: min(78vw, 1160px);
+  margin: 0;
+  transform: translateX(-50%);
+  color: #f5ecd4;
+  text-align: center;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: clamp(6rem, 19vw, 19rem);
+  font-weight: 600;
+  line-height: .72;
+  letter-spacing: -.09em;
+  text-shadow: 0 12px 64px #130f0880;
+}
+
+.deer-scene-subtitle {
+  margin-top: .12em;
+  font-size: .22em;
+  font-weight: 500;
+  letter-spacing: .42em;
+  line-height: 1.2;
+}
+
+.deer-scene-caption {
+  position: absolute;
+  bottom: 13%;
+  left: 8%;
+  max-width: 330px;
+  margin: 0;
+  color: #f1e9d5;
+  font-size: clamp(12px, 1.1vw, 15px);
+  line-height: 1.65;
+  text-shadow: 0 2px 18px #000b;
+}
+
+.deer-scene-grass {
+  pointer-events: none;
+  filter: blur(var(--entry-blur));
+  transition: translate .38s cubic-bezier(.2,.75,.2,1);
+  will-change: translate;
+}
+
+.deer-scene-grass img {
+  position: absolute;
+  display: block;
+  height: auto;
+  object-fit: contain;
+}
+
+.deer-scene-grass-back {
+  z-index: 2;
+  translate: var(--pointer-grass-back-x, 0px) var(--pointer-grass-back-y, 0px);
+}
+
+.deer-scene-grass-back img {
+  right: -6%;
+  bottom: 5%;
+  width: 112%;
+}
+
+.deer-scene-birds,
+.deer-scene-deer {
+  position: absolute;
+  display: block;
+  object-fit: contain;
+  pointer-events: none;
+  filter: blur(var(--entry-blur));
+  transition: translate .38s cubic-bezier(.2,.75,.2,1);
+  will-change: translate;
+}
+
+.deer-scene-birds {
+  z-index: 4;
+  top: 9%;
+  left: 28%;
+  width: min(55vw, 900px);
+  height: min(43vh, 420px);
+  translate: calc(-50% + var(--pointer-birds-x, 0px)) var(--pointer-birds-y, 0px);
+}
+
+.deer-scene-deer {
+  z-index: 5;
+  top: 54%;
+  left: 73%;
+  width: min(53vw, 840px);
+  height: min(83vh, 850px);
+  translate: calc(-50% + var(--pointer-deer-x, 0px)) calc(-50% + var(--pointer-deer-y, 0px));
+  filter: blur(var(--entry-blur)) drop-shadow(0 18px 30px #24170b6b);
+}
+
+.deer-scene-ground {
+  z-index: 6;
+  top: auto;
+  height: min(31vh, 310px);
+  pointer-events: none;
+  filter: blur(var(--entry-blur));
+  translate: var(--pointer-ground-x, 0px) var(--pointer-ground-y, 0px);
+  transition: translate .38s cubic-bezier(.2,.75,.2,1);
+  will-change: translate;
+}
+
+.deer-scene-ground img {
+  position: absolute;
+  right: -2%;
+  bottom: -1%;
+  left: -2%;
+  width: 104%;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom center;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 28%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 28%);
+}
+
+.deer-scene-index {
+  position: absolute;
+  z-index: 7;
+  right: 8%;
+  bottom: 7%;
+  left: 8%;
+  display: flex;
+  justify-content: space-between;
+  color: #f0e4c3;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.deer-scene-progress {
+  position: absolute;
+  z-index: 8;
+  top: 50%;
+  right: 4.5%;
+  width: 1px;
+  height: 74px;
+  transform: translateY(-50%);
+  background: #f0e4c35c;
+}
+
+.deer-scene-progress span {
+  display: block;
+  width: 1px;
+  height: var(--scene-progress-percent);
+  background: #f0e4c3;
+}
+
+@media (max-width: 760px) {
+  .deer-scene-section { height: 100svh; min-height: 520px; }
+  .deer-scene-stage { min-height: 520px; }
+  .deer-scene-eyebrow { top: 10%; left: 7%; font-size: 7px; letter-spacing: .14em; }
+  .deer-scene-text-layer h2 { top: 26%; left: 46%; width: 92vw; font-size: clamp(5rem, 28vw, 11rem); }
+  .deer-scene-subtitle { font-size: .18em; letter-spacing: .3em; }
+  .deer-scene-grass-back img { right: -22%; bottom: 6%; width: 145vw; }
+  .deer-scene-birds { top: 10%; left: 23%; width: 78vw; height: 36vh; }
+  .deer-scene-deer { top: 55%; left: 72%; width: 78vw; height: 76vh; }
+  .deer-scene-caption { bottom: 13%; left: 7%; max-width: 230px; font-size: 11px; }
+  .deer-scene-ground { height: 24vh; }
+  .deer-scene-index { right: 7%; bottom: 4%; left: 7%; font-size: 6px; letter-spacing: .12em; }
+  .deer-scene-progress { right: 3%; height: 58px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deer-scene-section { height: auto; min-height: 0; }
+  .deer-scene-stage { position: relative; top: auto; }
+  .deer-scene-stage *, .deer-scene-stage *::before, .deer-scene-stage *::after { transition: none !important; filter: none !important; }
+}
+
+/* Same title rhythm; deer rises from below while the flock drifts in from the side. */
+[data-scene-reveal] .deer-scene-text-layer h2 > span:first-child,
+[data-scene-reveal] .deer-scene-subtitle { display:block;opacity:0;clip-path:inset(0 100% 0 0);transform:translate3d(0,36px,0) }
+[data-scene-reveal].is-scene-revealed .deer-scene-text-layer h2 > span:first-child { animation:eco-title-reveal .95s cubic-bezier(.2,.8,.2,1) .12s both }
+[data-scene-reveal].is-scene-revealed .deer-scene-subtitle { animation:eco-title-reveal .9s cubic-bezier(.2,.8,.2,1) .32s both }
+[data-scene-reveal] .deer-scene-deer { opacity:0;filter:blur(14px) drop-shadow(0 18px 30px #24170b6b);transform:translate3d(0,22%,0) scale(.88);transform-origin:center }
+[data-scene-reveal].is-scene-revealed .deer-scene-deer { animation:deer-arrive 1.45s cubic-bezier(.16,.75,.24,1) .42s both }
+[data-scene-reveal] .deer-scene-birds { opacity:0;filter:blur(12px);transform:translate3d(18%,12px,0) scale(.9) }
+[data-scene-reveal].is-scene-revealed .deer-scene-birds { animation:deer-flock-arrive 1.45s cubic-bezier(.16,.75,.24,1) .42s both }
+@keyframes deer-arrive{0%{opacity:0;filter:blur(14px) drop-shadow(0 18px 30px #24170b6b);transform:translate3d(0,22%,0) scale(.88)}55%{opacity:1}78%{transform:translate3d(0,-2%,0) scale(1.025)}100%{opacity:1;filter:blur(0) drop-shadow(0 18px 30px #24170b6b);transform:translate3d(0,0,0) scale(1)}}
+@keyframes deer-flock-arrive{0%{opacity:0;filter:blur(12px);transform:translate3d(18%,12px,0) scale(.9)}55%{opacity:1}78%{transform:translate3d(-2%,-4px,0) scale(1.025)}100%{opacity:1;filter:blur(0);transform:translate3d(0,0,0) scale(1)}}
+@media(prefers-reduced-motion:reduce){[data-scene-reveal] .deer-scene-text-layer h2 > span:first-child,[data-scene-reveal] .deer-scene-subtitle{opacity:1;clip-path:none;transform:none;animation:none!important}[data-scene-reveal] .deer-scene-deer,[data-scene-reveal] .deer-scene-birds{opacity:1;filter:none;transform:none;animation:none!important}}

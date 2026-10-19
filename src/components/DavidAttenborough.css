@@ -1,0 +1,22 @@
+.speaker-feature{position:relative;isolation:isolate;overflow:hidden;width:min(100%,1680px);min-height:clamp(460px,60svh,680px);margin:8px auto 0;padding:clamp(24px,3.4vw,54px);border-radius:15px;background:#fff;color:#172018}
+.speaker-feature-content{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);align-items:center;gap:clamp(24px,6vw,100px);width:min(100%,1480px);min-height:inherit;margin:0 auto;filter:blur(6px);transform:translate3d(0,20px,0);transition:filter .65s ease,transform .65s cubic-bezier(.2,.7,.2,1)}
+.speaker-feature.is-in-view .speaker-feature-content{filter:blur(0);transform:translate3d(0,0,0)}
+.speaker-feature-portrait{position:relative;align-self:end;display:flex;align-items:flex-end;justify-content:center;min-height:clamp(580px,92svh,960px)}
+.speaker-feature-portrait img{display:block;width:min(158%,1100px);height:clamp(600px,100svh,1040px);object-fit:contain;object-position:center bottom;filter:drop-shadow(0 26px 34px #18231512);mask-image:linear-gradient(to bottom,#000 0%,#000 88%,transparent 100%)}
+.speaker-feature-copy{max-width:700px;padding:18px 0 26px}
+.speaker-feature-kicker{display:flex;align-items:center;gap:12px;margin:0 0 clamp(18px,3vw,38px);color:#6c795d;font-size:9px;font-weight:600;letter-spacing:.2em}
+.speaker-feature-kicker span{display:block;width:24px;height:1px;background:#80916c}
+.speaker-feature-copy h2{margin:0 0 clamp(18px,2.8vw,38px);color:#182419;font-size:clamp(42px,6.4vw,92px);font-weight:400;line-height:.98;letter-spacing:-.065em}
+.speaker-feature-copy blockquote{max-width:680px;margin:0;color:#344638;font-family:Georgia,'Times New Roman',serif;font-size:clamp(29px,4.4vw,62px);font-weight:400;line-height:1.16;letter-spacing:-.035em}
+.speaker-feature-attribution{margin:clamp(18px,2.8vw,34px) 0 8px;color:#283a2b;font-size:10px;font-weight:700;letter-spacing:.18em}
+.speaker-feature-source{display:inline-flex;align-items:center;gap:5px;color:#788270;font-size:8px;font-weight:600;letter-spacing:.14em}.speaker-feature-source i{font-family:inherit;font-style:normal}.speaker-feature-source span{margin-left:5px;color:#596b49;transition:transform .2s}.speaker-feature-source:hover span{transform:translate(2px,-2px)}
+.speaker-feature-copy>*{opacity:0;transform:translate3d(-30px,0,0);transition:opacity .85s ease,transform .9s cubic-bezier(.22,.68,0,1)}
+.speaker-feature.is-in-view .speaker-feature-copy>*{opacity:1;transform:translate3d(0,0,0)}
+.speaker-feature.is-in-view .speaker-feature-copy>*:nth-child(1){transition-delay:.08s}
+.speaker-feature.is-in-view .speaker-feature-copy>*:nth-child(2){transition-delay:.2s}
+.speaker-feature.is-in-view .speaker-feature-copy>*:nth-child(3){transition-delay:.32s}
+.speaker-feature.is-in-view .speaker-feature-copy>*:nth-child(4){transition-delay:.44s}
+.speaker-feature.is-in-view .speaker-feature-copy>*:nth-child(5){transition-delay:.52s}
+@media(max-width:820px){.speaker-feature{min-height:clamp(440px,64svh,620px);padding:22px 6vw 16px}.speaker-feature-content{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:18px}.speaker-feature-portrait,.speaker-feature-portrait img{min-height:420px;height:min(60svh,570px)}.speaker-feature-copy{padding:24px 0}.speaker-feature-copy h2{font-size:clamp(38px,7vw,68px)}.speaker-feature-copy blockquote{font-size:clamp(26px,4.8vw,42px)}}
+@media(max-width:620px){.speaker-feature{min-height:0;margin-top:8px;padding:24px 22px 30px}.speaker-feature-content{grid-template-columns:1fr;gap:0}.speaker-feature-portrait{min-height:0;height:clamp(300px,92vw,430px);order:0}.speaker-feature-portrait img{height:100%;min-height:0;width:min(100%,430px)}.speaker-feature-copy{padding:18px 0 0}.speaker-feature-kicker{margin-bottom:27px;font-size:8px}.speaker-feature-copy h2{margin-bottom:26px;font-size:clamp(42px,11vw,62px)}.speaker-feature-copy blockquote{font-size:clamp(28px,7.6vw,40px)}.speaker-feature-attribution{margin-top:28px}}
+@media(prefers-reduced-motion:reduce){.speaker-feature-content{filter:none!important;transform:none!important;will-change:auto}.speaker-feature-copy>*{opacity:1;transform:none;transition:none;will-change:auto}}

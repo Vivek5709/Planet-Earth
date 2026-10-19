@@ -1,0 +1,32 @@
+.event-invitation {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  width: calc(100% - 12px);
+  margin: 0 auto 12px;
+  padding: clamp(72px, 10vw, 142px) 24px;
+  border-radius: 22px;
+  color: #19251c;
+  background: #fff;
+  text-align: center;
+}
+
+.event-invitation-eyebrow { display: flex; align-items: center; gap: 12px; margin: 0 0 30px; color: #71836f; font-size: 9px; font-weight: 700; letter-spacing: .2em; }
+.event-invitation-eyebrow span { width: 25px; height: 1px; background: #81947b; }
+.event-invitation h2 { margin: 0; color: #18251c; font-size: clamp(48px, 7vw, 96px); font-weight: 500; line-height: .94; letter-spacing: -.075em; text-wrap: balance; }
+.event-invitation h2 em { color: #778c69; font-style: normal; }
+.event-invitation-description { max-width: 660px; margin: 28px 0 0; color: #59655c; font-size: clamp(14px, 1.2vw, 17px); line-height: 1.85; }
+.event-invitation-cta { display: inline-flex; align-items: center; gap: 24px; margin-top: 30px; padding: 15px 18px; border: 1px solid #87977e; color: #334332; font-size: 8px; font-weight: 700; letter-spacing: .16em; transition: color .2s, background .2s; }
+.event-invitation-cta span { font-size: 14px; }
+.event-invitation-cta:hover { color: #fff; background: #334332; }
+
+@media (max-width: 620px) {
+  .event-invitation { padding: 62px 28px; }
+  .event-invitation-eyebrow { margin-bottom: 24px; font-size: 7px; }
+  .event-invitation h2 { font-size: clamp(44px, 11vw, 64px); }
+  .event-invitation-description { margin-top: 21px; font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .event-invitation-cta { transition: none; }
+}

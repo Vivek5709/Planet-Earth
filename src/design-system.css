@@ -1,0 +1,102 @@
+:root {
+  --font-family: 'Montserrat', sans-serif;
+  --text-primary: 16px;
+  --text-secondary: 13px;
+  --text-tertiary: 10px;
+  --radius-section: 16px;
+  --radius-card: 12px;
+  --radius-button: 999px;
+  --radius-control: 8px;
+}
+
+/* Use one typeface throughout, including controls and quotations. */
+*,
+*::before,
+*::after {
+  font-family: var(--font-family) !important;
+}
+
+/* Shared copy hierarchy: readable body, supporting copy, and metadata. */
+p,
+li {
+  font-size: var(--text-secondary) !important;
+}
+
+.description,
+.eco-intro p,
+.eco-dialog-description,
+.eco-closing-copy,
+.show-topics-intro,
+.audience-copy > p,
+.ecosystem-intro p,
+.event-invitation-description,
+.speaker-slide-intro,
+.ocean-meet-description,
+.snake-journey-copy p,
+.ecosystem-intro-copy > p,
+.event-experience-intro,
+.event-invitation-copy,
+.pass-builder-heading > p:last-child {
+  font-size: var(--text-primary) !important;
+}
+
+.eco-dialog-intro { font-size: clamp(22px, 3vw, 32px) !important; }
+
+[class*="eyebrow"],
+[class*="kicker"],
+[class*="caption"],
+[class*="coordinate"],
+[class*="index"],
+[class*="footer"],
+[class*="label"],
+[class*="taxonomy"],
+[class*="step-"] {
+  font-size: var(--text-tertiary) !important;
+}
+
+/* Keep display and section heading scales intact; normalize navigation and actions. */
+.nav-links a { font-size: var(--text-secondary) !important; }
+.ticket-link,
+.button,
+.pass-primary-button,
+.pass-secondary-button,
+.speaker-slide-link { font-size: var(--text-tertiary) !important; }
+
+/* Section surfaces, content cards, actions, and form controls share radii. */
+.hero,
+.speaker-feature,
+.ocean-meet,
+.event-experience,
+.event-invitation,
+.pass-builder,
+.audience-section,
+.show-topics,
+.snake-journey,
+.ecosystem-intro,
+.ecosystems,
+.eco-heading {
+  border-radius: var(--radius-section) !important;
+}
+
+.eco-panel,
+.pass-animal-choice,
+.generated-pass-card,
+.event-experience-card,
+.speaker-card,
+.speaker-slide {
+  border-radius: var(--radius-card) !important;
+}
+
+.ticket-link,
+.button,
+.pass-primary-button,
+.pass-secondary-button,
+.speaker-slide-link {
+  border-radius: var(--radius-button) !important;
+}
+
+input,
+select,
+textarea {
+  border-radius: var(--radius-control) !important;
+}

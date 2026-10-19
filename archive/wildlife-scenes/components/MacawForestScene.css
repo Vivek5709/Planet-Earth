@@ -1,0 +1,332 @@
+.macaw-scene-section {
+  position: relative;
+  height: 100svh;
+  min-height: 560px;
+  isolation: isolate;
+}
+
+.macaw-scene-stage {
+  position: relative;
+  top: 6px;
+  width: 100%;
+  height: calc(100svh - 12px);
+  min-height: 560px;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 15px;
+  background: #10190e;
+  --scene-progress: 0;
+  --scene-progress-percent: 0%;
+  --scene-entry: 1;
+  --entry-opacity: 1;
+  --perched-opacity: 1;
+  --entry-blur: 4px;
+  --scroll-bg-y: 0px;
+  --scroll-text-y: 0px;
+  --scroll-back-y: 0px;
+  --scroll-front-y: 0px;
+  --scroll-flight-y: 0px;
+  --scroll-perched-y: 0px;
+  --scroll-ground-y: 0px;
+  --scroll-flight-scale: 1;
+  --scroll-perched-scale: 1;
+}
+
+[data-scene-reveal].is-scene-revealed .macaw-scene-stage { --entry-blur: 0px; }
+.macaw-scene-stage img,
+.macaw-scene-stage .macaw-scene-text-layer { transition: filter .55s ease; }
+
+.macaw-scene-background,
+.macaw-scene-shade,
+.macaw-scene-text-layer,
+.macaw-scene-foliage,
+.macaw-scene-floor {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.macaw-scene-background {
+  z-index: 0;
+  object-fit: cover;
+  object-position: center;
+  scale: 1.07;
+  translate: var(--pointer-bg-x, 0px) calc(var(--scroll-bg-y) + var(--pointer-bg-y, 0px));
+  filter: blur(calc(1.5px + var(--entry-blur))) saturate(.84) brightness(.85);
+  transition: translate .42s cubic-bezier(.2,.75,.2,1);
+  will-change: translate, scale;
+}
+
+.macaw-scene-shade {
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, #07100ab8 0%, #07100a2c 46%, #07100a14 72%, #07100a55 100%), linear-gradient(0deg, #09100be0 0%, transparent 29%, #07100a24 100%);
+}
+
+.macaw-scene-text-layer {
+  z-index: 1;
+  pointer-events: none;
+  translate: var(--pointer-text-x, 0px) calc(var(--scroll-text-y) + var(--pointer-text-y, 0px));
+  scale: var(--scroll-text-scale, 1);
+  opacity: var(--entry-opacity);
+  filter: blur(var(--entry-blur));
+  transition: translate .38s cubic-bezier(.2,.75,.2,1);
+  will-change: translate, scale;
+}
+
+.macaw-scene-eyebrow {
+  position: absolute;
+  top: 11%;
+  left: 8%;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin: 0;
+  color: #e2e5c9;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .2em;
+}
+
+.macaw-scene-eyebrow::before {
+  content: '';
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: #d8dfb1;
+}
+
+.macaw-scene-eyebrow span { color: #b3bd83; }
+
+.macaw-scene-text-layer h2 {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .07em;
+  width: min(82vw, 1180px);
+  margin: 0;
+  transform: translateX(-50%);
+  color: #f2f0d7;
+  text-align: center;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: clamp(6rem, 19vw, 19rem);
+  font-weight: 600;
+  line-height: .72;
+  letter-spacing: -.09em;
+  text-shadow: 0 12px 64px #070b0755;
+}
+
+.macaw-scene-subtitle {
+  margin-top: .12em;
+  font-size: .24em;
+  font-weight: 500;
+  letter-spacing: .42em;
+  line-height: 1.2;
+}
+
+.macaw-scene-caption {
+  position: absolute;
+  bottom: 13%;
+  left: 8%;
+  max-width: 330px;
+  margin: 0;
+  color: #ececda;
+  font-size: clamp(12px, 1.1vw, 15px);
+  line-height: 1.65;
+  text-shadow: 0 2px 18px #000b;
+}
+
+.macaw-scene-foliage {
+  pointer-events: none;
+  overflow: visible;
+  opacity: 1;
+  filter: blur(var(--entry-blur));
+  transition: translate .38s cubic-bezier(.2,.75,.2,1);
+  will-change: translate;
+}
+
+.macaw-scene-foliage img {
+  position: absolute;
+  display: block;
+  height: auto;
+  object-fit: contain;
+  filter: saturate(.82) brightness(.75) drop-shadow(0 12px 22px #080c0670);
+}
+
+.macaw-scene-foliage-back {
+  z-index: 2;
+  translate: var(--pointer-back-x, 0px) calc(var(--scroll-back-y) + var(--pointer-back-y, 0px));
+}
+
+.macaw-scene-foliage-back img {
+  top: auto;
+  bottom: -3%;
+  left: -9%;
+  width: 118%;
+  height: min(48vh, 470px);
+  object-fit: cover;
+  object-position: center bottom;
+  opacity: .82;
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 28%, #000 100%);
+}
+
+.macaw-scene-foliage-mid {
+  z-index: 3;
+  translate: var(--pointer-front-x, 0px) calc(var(--scroll-front-y) + var(--pointer-front-y, 0px));
+}
+
+.macaw-scene-foliage-mid img {
+  right: -13%;
+  bottom: 5%;
+  width: min(75vw, 1120px);
+  opacity: .78;
+}
+
+.macaw-scene-flight,
+.macaw-scene-perched {
+  position: absolute;
+  z-index: 4;
+  display: block;
+  object-fit: contain;
+  pointer-events: none;
+  filter: blur(var(--entry-blur)) drop-shadow(0 18px 30px #07100a91);
+  opacity: var(--entry-opacity);
+  will-change: translate, scale, opacity;
+}
+
+.macaw-scene-flight {
+  top: 42%;
+  left: 47%;
+  width: min(69vw, 1120px);
+  height: min(65vh, 690px);
+  translate: calc(-50% + var(--pointer-bird-x, 0px)) calc(-50% + var(--scroll-flight-y) + var(--pointer-bird-y, 0px));
+  scale: var(--scroll-flight-scale);
+}
+
+.macaw-scene-perched {
+  top: 51%;
+  left: 78%;
+  width: min(31vw, 470px);
+  height: min(74vh, 770px);
+  translate: calc(-50% + var(--pointer-perched-x, 0px)) calc(-50% + var(--scroll-perched-y) + var(--pointer-perched-y, 0px));
+  scale: var(--scroll-perched-scale);
+  opacity: var(--perched-opacity);
+}
+
+.macaw-scene-floor {
+  z-index: 5;
+  top: auto;
+  height: min(25vh, 245px);
+  opacity: 1;
+  filter: blur(var(--entry-blur));
+  translate: 0 calc(var(--scroll-ground-y) + var(--pointer-ground-y, 0px));
+  transition: translate .38s cubic-bezier(.2,.75,.2,1);
+  will-change: translate;
+}
+
+.macaw-scene-floor img {
+  position: absolute;
+  right: -2%;
+  bottom: -1%;
+  left: -2%;
+  width: 104%;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom center;
+  filter: saturate(.9) brightness(.76);
+}
+
+.macaw-scene-index {
+  position: absolute;
+  z-index: 6;
+  right: 8%;
+  bottom: 7%;
+  left: 8%;
+  display: flex;
+  justify-content: space-between;
+  color: #e2e3c9;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.macaw-scene-progress {
+  position: absolute;
+  z-index: 7;
+  top: 50%;
+  right: 4.5%;
+  width: 1px;
+  height: 74px;
+  transform: translateY(-50%);
+  background: #eff0d35c;
+}
+
+.macaw-scene-progress span {
+  display: block;
+  width: 1px;
+  height: var(--scene-progress-percent);
+  background: #f1f0d2;
+}
+
+@media (max-width: 760px) {
+  .macaw-scene-section { height: 100svh; min-height: 520px; }
+  .macaw-scene-stage { min-height: 520px; }
+  .macaw-scene-eyebrow { top: 10%; left: 7%; font-size: 7px; letter-spacing: .14em; }
+  .macaw-scene-text-layer h2 { top: 27%; width: 92vw; font-size: clamp(5.5rem, 28vw, 12rem); }
+  .macaw-scene-subtitle { font-size: .19em; letter-spacing: .32em; }
+  .macaw-scene-foliage-back img {
+    top: auto;
+    bottom: -2%;
+    left: -20%;
+    width: 140vw;
+    height: 38vh;
+    object-fit: cover;
+    object-position: center bottom;
+  }
+  .macaw-scene-foliage-mid img { right: -34%; bottom: 9%; width: 112vw; }
+  .macaw-scene-flight { top: 43%; left: 48%; width: 108vw; height: 52vh; }
+  .macaw-scene-perched { top: 54%; left: 78%; width: 45vw; height: 60vh; }
+  .macaw-scene-caption { bottom: 13%; left: 7%; max-width: 230px; font-size: 11px; }
+  .macaw-scene-floor { height: 22vh; }
+  .macaw-scene-index { right: 7%; bottom: 4%; left: 7%; font-size: 6px; letter-spacing: .12em; }
+  .macaw-scene-progress { right: 3%; height: 58px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .macaw-scene-section { height: auto; min-height: 0; }
+  .macaw-scene-stage { position: relative; top: auto; }
+  .macaw-scene-stage *, .macaw-scene-stage *::before, .macaw-scene-stage *::after { transition: none !important; }
+}
+
+/* Match the bird typography section's exact title and flight entrance. */
+[data-scene-reveal] .macaw-scene-text-layer h2 > span:first-child,
+[data-scene-reveal] .macaw-scene-subtitle {
+  display: block;
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  transform: translate3d(0,36px,0);
+}
+[data-scene-reveal].is-scene-revealed .macaw-scene-text-layer h2 > span:first-child {
+  animation: eco-title-reveal .95s cubic-bezier(.2,.8,.2,1) .12s both;
+}
+[data-scene-reveal].is-scene-revealed .macaw-scene-subtitle {
+  animation: eco-title-reveal .9s cubic-bezier(.2,.8,.2,1) .32s both;
+}
+[data-scene-reveal].is-scene-revealed .macaw-scene-flight,
+[data-scene-reveal].is-scene-revealed .macaw-scene-perched {
+  animation: eco-bird-flight 1.45s cubic-bezier(.16,.75,.24,1) .42s both;
+}
+@media(prefers-reduced-motion:reduce){
+  [data-scene-reveal] .macaw-scene-text-layer h2 > span:first-child,
+  [data-scene-reveal] .macaw-scene-subtitle { opacity: 1; clip-path: none; transform: none; animation: none !important; }
+  [data-scene-reveal] .macaw-scene-flight,
+  [data-scene-reveal] .macaw-scene-perched { opacity: 1; transform: none; animation: none !important; }
+}
