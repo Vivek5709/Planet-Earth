@@ -95,14 +95,14 @@ export default function Speakers() {
     const progress = Math.min(1, Math.max(0, -section.getBoundingClientRect().top / scrollDistance))
     track.style.transform = `translate3d(${-travel * progress}px, 0, 0)`
 
-    cards.forEach((card, index) => {
+    cards.forEach((card) => {
       card.style.setProperty('--speaker-opacity', '1')
       card.style.setProperty('--speaker-blur', '0px')
       card.style.setProperty('--speaker-rise', '0px')
     })
   }, [])
 
-  const lenis = useLenis(updateTimeline)
+  useLenis(updateTimeline)
 
   useEffect(() => {
     updateTimeline()
